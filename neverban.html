@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEVERBAN.CC — Kirin Life Hub</title>
+    <style>
+        :root {
+            --bg-color: #0c0f14;
+            --sidebar-color: #080a0e;
+            --card-color: #10141c;
+            --accent-color: #00aeff;
+            --text-main: #f0f0f5;
+            --text-muted: #787d8c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Панель выбора языков (Neverlose Style) */
+        .lang-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(16, 20, 28, 0.6);
+            border: 1px solid rgba(0, 174, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 6px;
+            padding: 5px 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            color: var(--accent-color);
+            text-shadow: 0 0 8px rgba(0, 174, 255, 0.5);
+        }
+
+        /* Скрытие оригинального виджета Google */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget {
+            display: none !important;
+        }
+        body {
+            top: 0px !important;
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 900px;
+            background: linear-gradient(135deg, rgba(16,20,28,0.6) 0%, rgba(8,10,14,0.8) 100%);
+            border: 1px solid rgba(0, 174, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--accent-color);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 174, 255, 0.4);
+            animation: pulse 3s infinite alternate;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background-color: rgba(16, 20, 28, 0.7);
+            border: 1px solid rgba(120, 125, 140, 0.1);
+            border-radius: 8px;
+            padding: 25px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 174, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .btn-inject {
+            display: inline-block;
+            background: linear-gradient(90deg, #0077ff, #00aeff);
+            color: #fff;
+            padding: 14px 45px;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 174, 255, 0.3);
+        }
+
+        .btn-inject:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 25px rgba(0, 174, 255, 0.5);
+        }
+
+        .btn-inject:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 15px rgba(0, 174, 255, 0.3); }
+            100% { text-shadow: 0 0 30px rgba(0, 174, 255, 0.6); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Переключатель языков -->
+    <div class="lang-container">
+        <button class="lang-btn active" onclick="changeLanguage('ru', this)">RU</button>
+        <button class="lang-btn" onclick="changeLanguage('en', this)">EN</button>
+        <button class="lang-btn" onclick="changeLanguage('zh-CN', this)">ZH</button>
+        <button class="lang-btn" onclick="changeLanguage('fr', this)">FR</button>
+        <button class="lang-btn" onclick="changeLanguage('es', this)">ES</button>
+        <button class="lang-btn" onclick="changeLanguage('it', this)">IT</button>
+        <button class="lang-btn" onclick="changeLanguage('ja', this)">JA</button>
+    </div>
+
+    <!-- Элемент для инициализации Google Translate -->
+    <div id="google_translate_element"></div>
+
+    <div id="particles-js"></div>
+
+    <div class="wrapper">
+        <div class="logo">NEVERBAN</div>
+        <div class="subtitle">Advanced Private Solution for Roblox: Kirin Life</div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <div class="feature-title">Sky Farm V2</div>
+                <div class="feature-desc">Плавное удержание высоты 650м без резких рывков и падений с анти-креном.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Vehicle Stats Mods</div>
+                <div class="feature-desc">Кастомный MaxSpeed лимит, мгновенный модуль тормоза и бесконечный бензин.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <div class="feature-title">Safe Teleports</div>
+                <div class="feature-desc">Безопасное перемещение по ключевым NPC и магазинам через Tween-интерполяцию.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <div class="feature-title">Media Integration</div>
+                <div class="feature-desc">Полный контроль десктопных плееров и отображение треков прямо в UI игры.</div>
+            </div>
+        </div>
+
+        <button class="btn-inject" onclick="copyLoader()">Скопировать лоадер</button>
+    </div>
+
+    <!-- Загрузка внешних скриптов (Частицы + Переводчик) -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://google.com"></script>
+    
+    <script>
+        // Инициализация скрытого движка перевода
+        function googleTranslateInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ru',
+                includedLanguages: 'ru,en,zh-CN,fr,es,it,ja',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        // Логика кастомного переключения языков
+        function changeLanguage(langCode, button) {
+            // Переключаем активный класс у кнопок панели
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Находим скрытый элемент выбора Google и имитируем выбор языка пользователем
+            const selectFrame = document.querySelector('.goog-te-combo');
+            if (selectFrame) {
+                selectFrame.value = langCode;
+                selectFrame.dispatchEvent(new Event('change'));
+            }
+        }
+
+        function copyLoader() {
+            const loaderCode = 'loadstring(game:HttpGet("https://pastebin.com"))()';
+            navigator.clipboard.writeText(loaderCode).then(() => {
+                alert("Код загрузчика NEVERBAN успешно скопирован! Вставьте его в ваш Executor.");
+            }).catch(err => {
+                console.error("Ошибка копирования: ", err);
+            });
+        }
+
+        // Анимированный фон
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00aeff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00aeff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false } },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.3 } } }
+            },
+            "retina_detect": true
+});
